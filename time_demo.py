@@ -66,4 +66,4 @@ print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 # 将格式化时间转化为时间戳
 a = "Mon May  8 14:27:08 2017"
 print(time.mktime(time.strptime(a, "%a %b %d %H:%M:%S %Y")))
-print time
+print(time)
