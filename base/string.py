@@ -61,12 +61,19 @@ def is_valid_mobile(mobile_num):
         return False
 
 
-def is_valid_email(email):
+def is_valid_email(email_str):
     """
     是否是有效的邮箱地址
-    :param email
+    :param email_str
     :return:
     """
+    email = "^[0-9a-zA-Z_]{1,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$"
+    if re.match(email, email_str):
+        print("正确的邮箱地址")
+        return True
+    else:
+        print("错误的邮箱地址")
+        return False
 
 
 def is_valid_id_num(id_num):
@@ -109,6 +116,9 @@ if __name__ == '__main__':
     """
     count = 0
     while count < 10:
-        input_mobile = input('请输入第%d个手机号码:' % (count + 1))
-        is_valid_mobile(input_mobile)
+        input_mobile = input('请输入第%d个字符串:' % (count + 1))
+        if is_valid_mobile(input_mobile):
+            pass
+        elif is_valid_email(input_mobile):
+            pass
         count = count + 1
