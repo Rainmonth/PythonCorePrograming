@@ -25,8 +25,8 @@ def is_valid_mobile(mobile_num):
     mobile_re = '^134[0-8]\d{7}|(13[5-9]|147|15[0-2,7-9]|178|18[2-4,7-8]|198)\d{8}$'
     mobile_virtual_re = '^170[3,5,6]\d{7}$'
 
-    tele = '^(133|149|153|173|180|181|189|199)\d{8}|170[0,1,2]\d{7}$'
-    telecome_re = '^(133|149|153|173|180|181|189|199)\d{8}$'
+    tele = '^(133|149|153|173|177|180|181|189|199)\d{8}|170[0,1,2]\d{7}$'
+    telecome_re = '^(133|149|153|173|177|180|181|189|199)\d{8}$'
     telecome_virtual_re = '^170[0,1,2]\d{7}$'
 
     unicom = '^(13[0-2]|145|155|156|166|17[5-6]|18[5-6])\d{8}|171\d{8}|170[4,7-9]\d{7}$'
@@ -64,6 +64,7 @@ def is_valid_mobile(mobile_num):
 def is_valid_email(email):
     """
     是否是有效的邮箱地址
+    :param email
     :return:
     """
 
@@ -71,7 +72,7 @@ def is_valid_email(email):
 def is_valid_id_num(id_num):
     """
     是否是有效的身份证号码
-    :param str:
+    :param id_num:
     :return:
     """
 
