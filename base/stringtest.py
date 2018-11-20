@@ -342,13 +342,15 @@ def get_all_mobiles(source_file='./test.txt'):
     """
     print('enter')
     mobile_pattern = r'1[3-9]\d{9}'
-    unicom_re = '^(13[0-2]|145|155|156|166|17[5-6]|18[5-6])\d{8}$'
-    f = open(source_file, 'r+')
-    result = re.findall(mobile_pattern, f.read())
-    if result and len(result) > 0:
-        print('共找到' + str(len(result)) + '个号码')
-        for num in result:
-            writeTxt(num + '\t')
+    try:
+        f = open(source_file, 'r+')
+        result = re.findall(mobile_pattern, f.read())
+        if result and len(result) > 0:
+            print('共找到' + str(len(result)) + '个号码')
+            for num in result:
+                writeTxt(num + '\t')
+    except Exception as e:
+        print(e)
 
 
 # 打开文件
@@ -356,12 +358,15 @@ def get_all_mobiles(source_file='./test.txt'):
 # 匹配手机号
 # 记录手机号
 def writeTxt(result, dis_file='./result.txt'):
-    # 打开文件，a代表追加
-    f = open(dis_file, 'a')
-    # 写入数据result
-    f.write(result)
-    # 关闭文件
-    f.close()
+    try:
+        # 打开文件，a代表追加
+        f = open(dis_file, 'a')
+        # 写入数据result
+        f.write(result)
+        # 关闭文件
+        f.close()
+    except Exception as e:
+        print(e)
 
 
 def get_all_emails(text):
