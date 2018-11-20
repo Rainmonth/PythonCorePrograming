@@ -1,5 +1,7 @@
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import re
+import os
 
 errors = ['验证通过！', '身份证号码位数不对', '身份证出身日期不对', '含有非法字符', '身份证校验错误', '身份证地区错误']
 
@@ -332,12 +334,34 @@ def get_verify_num_v3(id_num):
     return num
 
 
-def get_all_mobiles(text):
+def get_all_mobiles(source_file='./test.txt'):
     """
     获取text中所有的手机号
-    :param text:
+    :param source_file:
     :return:
     """
+    print('enter')
+    mobile_pattern = r'1[3-9]\d{9}'
+    unicom_re = '^(13[0-2]|145|155|156|166|17[5-6]|18[5-6])\d{8}$'
+    f = open(source_file, 'r+')
+    result = re.findall(mobile_pattern, f.read())
+    if result and len(result) > 0:
+        print('共找到' + str(len(result)) + '个号码')
+        for num in result:
+            writeTxt(num + '\t')
+
+
+# 打开文件
+# 遍历文件
+# 匹配手机号
+# 记录手机号
+def writeTxt(result, dis_file='./result.txt'):
+    # 打开文件，a代表追加
+    f = open(dis_file, 'a')
+    # 写入数据result
+    f.write(result)
+    # 关闭文件
+    f.close()
 
 
 def get_all_emails(text):
@@ -374,9 +398,10 @@ if __name__ == '__main__':
     # print('=' * 10 + '矩阵点乘' + '=' * 10)
     # print([x * y for a, b in zip(m, n) for x, y in zip(a, b)])
 
-    print(list(zip([1, 2], *[(3, 4), (5, 6), (7, 8)])))
-    print(list(zip([1, 2], (3, 4), (5, 6))))
-    a = [1, 2, 3]
-    b = [4, 5, 6]
-    print(list(zip(a, b)))
-    print(list(zip(*zip(a, b))))
+    # print(list(zip([1, 2], *[(3, 4), (5, 6), (7, 8)])))
+    # print(list(zip([1, 2], (3, 4), (5, 6))))
+    # a = [1, 2, 3]
+    # b = [4, 5, 6]
+    # print(list(zip(a, b)))
+    # print(list(zip(*zip(a, b))))
+    get_all_mobiles()
