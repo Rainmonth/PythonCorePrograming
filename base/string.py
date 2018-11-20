@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 import re
 
+errors = ['验证通过！', '身份证号码位数不对', '身份证出身日期不对', '含有非法字符', '身份证校验错误', '身份证地区错误']
+
 
 def is_valid_mobile(mobile_num):
     """
@@ -78,9 +80,6 @@ def is_valid_email(email_str):
     else:
         print("错误的邮箱地址")
         return False
-
-
-errors = ['验证通过！', '身份证号码位数不对', '身份证出身日期不对', '含有非法字符', '身份证校验错误', '身份证地区错误']
 
 
 def is_valid_id_num(id_num):
@@ -276,10 +275,10 @@ def is_yield_year(year):
 def check_verify_num(id_num):
     id_num = str(id_num).strip()
     if id_num[-1] == get_verify_num_v1(id_num):
-        print('校验成功')
+        print('校验码校验成功，校验值：' + id_num[-1] + ',实际值：' + get_verify_num_v1(id_num))
         return True
     else:
-        print('校验错误')
+        print('校验码校验错误，校验值：' + id_num[-1] + ',实际值：' + get_verify_num_v1(id_num))
         return False
 
 
@@ -310,7 +309,27 @@ def get_verify_num_v1(id_num):
 
 
 def get_verify_num_v2(id_num):
-    pass
+    if len(id_num) != 18:
+        print(errors[1])
+        return False
+    else:
+        temp = zip(id_num[0:17], [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2])
+        print(temp)
+        print(list(temp))
+        temp2 = map(lambda x: int(x[0] * x[1]), temp)
+        print(temp2)
+        print(list(temp2))
+        temp3 = sum(temp2)
+        print(temp3)
+
+        return temp3
+
+
+def get_verify_num_v3(id_num):
+    num = '10X98765432'[sum(map(lambda x: int(x[0]) * x[1],
+                                zip(id_num[0:17], [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]))) % 11]
+    print(str(num))
+    return num
 
 
 def get_all_mobiles(text):
@@ -348,4 +367,16 @@ if __name__ == '__main__':
     # check_birthday_num(input('请输入身份证号：'))
     # check_address_num(input('请输入身份证号：'))
     # check_verify_num(input('请输入身份证号：'))
-    is_valid_id_num(input('请输入身份证号：'))
+    # get_verify_num_v3(input('请输入身份证号：'))
+    # m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    # n = [[2, 2, 2], [3, 3, 3], [4, 4, 4]]
+    # # 左右两端各有10个
+    # print('=' * 10 + '矩阵点乘' + '=' * 10)
+    # print([x * y for a, b in zip(m, n) for x, y in zip(a, b)])
+
+    print(list(zip([1, 2], *[(3, 4), (5, 6), (7, 8)])))
+    print(list(zip([1, 2], (3, 4), (5, 6))))
+    a = [1, 2, 3]
+    b = [4, 5, 6]
+    print(list(zip(a, b)))
+    print(list(zip(*zip(a, b))))
