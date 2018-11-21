@@ -340,7 +340,6 @@ def get_all_mobiles(source_file='./test.txt'):
     :param source_file:
     :return:
     """
-    print('enter')
     mobile_pattern = r'1[3-9]\d{9}'
     try:
         f = open(source_file, 'r+')
@@ -369,10 +368,25 @@ def writeTxt(result, dis_file='./result.txt'):
         print(e)
 
 
-def get_all_emails(text):
+def get_all_emails(source_file='./test.txt'):
     """
     获取text中所有的邮箱
-    :param text:
+    :param source_file:
+    :return:
+    """
+    f = open(source_file, 'r+')
+    # re = r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+'
+    emails = re.findall(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+', f.read())
+    if emails and len(emails) > 0:
+        print('共找到' + str(len(emails)) + '个邮箱')
+        for email in emails:
+            writeTxt(email + '\t')
+
+
+def get_all_urls(source_file='./test.txt'):
+    """
+    获取所有url
+    :param source_file:
     :return:
     """
 
@@ -410,3 +424,4 @@ if __name__ == '__main__':
     # print(list(zip(a, b)))
     # print(list(zip(*zip(a, b))))
     get_all_mobiles()
+    get_all_emails()
