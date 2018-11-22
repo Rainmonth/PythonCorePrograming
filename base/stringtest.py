@@ -389,6 +389,13 @@ def get_all_urls(source_file='./test.txt'):
     :param source_file:
     :return:
     """
+    f = open(source_file, 'r+')
+    url_re = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*,]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+    urls = re.findall(url_re, f.read())
+    if urls and len(urls) > 0:
+        print('共找到' + str(len(urls)) + '个url')
+        for url in urls:
+            writeTxt(url + '\t')
 
 
 def get_total_words(text):
@@ -425,3 +432,4 @@ if __name__ == '__main__':
     # print(list(zip(*zip(a, b))))
     get_all_mobiles()
     get_all_emails()
+    get_all_urls()

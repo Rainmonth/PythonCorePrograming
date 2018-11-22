@@ -3,3 +3,7 @@
 randy.zhang@yeah.net
 randy-zhang@yeah.net
 randy+zhang@yeah.net
+http://a.
+http://1.+
+http://$
+http://%
