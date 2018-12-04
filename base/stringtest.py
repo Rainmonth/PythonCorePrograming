@@ -414,10 +414,10 @@ if __name__ == '__main__':
     """
 
     # is_yield_year(input("请输入年份："))
-    # check_birthday_num(input('请输入身份证号：'))
-    # check_address_num(input('请输入身份证号：'))
-    # check_verify_num(input('请输入身份证号：'))
-    # get_verify_num_v3(input('请输入身份证号：'))
+    check_birthday_num(input('请输入身份证号：'))
+    check_address_num(input('请输入身份证号：'))
+    check_verify_num(input('请输入身份证号：'))
+    get_verify_num_v3(input('请输入身份证号：'))
     # m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     # n = [[2, 2, 2], [3, 3, 3], [4, 4, 4]]
     # # 左右两端各有10个
