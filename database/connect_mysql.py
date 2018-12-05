@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import MySQLdb
+import pymysql
 
-cxn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='zh7359431', port=3306)
+cxn = pymysql.connect(host='127.0.0.1', user='root', passwd='zh7359431', port=3306)
 cur = cxn.cursor()
 cur.execute('show databases;')
 cur.execute('create database if not EXISTS test;')
@@ -16,21 +16,21 @@ cur.execute("INSERT INTO users VALUES('bot', 7200)")
 cur.execute("SELECT * FROM users WHERE login LIKE 'j%'")
 
 for data in cur.fetchall():
-    print '%s\t%s' % data
+    print('%s\t%s' % data)
 
 cur.execute("UPDATE users SET userid=7100 WHERE userid=7001")
 
 cur.execute("SELECT * FROM users")
 
 for data in cur.fetchall():
-    print '%s\t%s' % data
+    print('%s\t%s' % data)
 
 cur.execute('DELETE FROM users WHERE login="bot"')
 
 cur.execute("SELECT * FROM users")
 
 for data in cur.fetchall():
-    print '%s\t%s' % data
+    print('%s\t%s' % data)
 
 cur.execute('DROP TABLE users')
 
