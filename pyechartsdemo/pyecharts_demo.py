@@ -71,6 +71,12 @@ def generate_kfc_dks_distribute_polar_bar_chart():
     polar.add('', dks_num, radius_data=radius, type='barAngle', is_stack=True)
     polar.render(output_file_path + 'htmls/省会城市快餐店数量极坐标堆叠柱状图.html')
 
+    polar = Polar('省会城市快餐店数量', width=1200, height=1200)
+    polar.add('', mc_num, radius_data=radius, type='barRadius', is_stack=True)
+    polar.add('', kfc_num, radius_data=radius, type='barRadius', is_stack=True)
+    polar.add('', dks_num, radius_data=radius, type='barRadius', is_stack=True)
+    polar.render(output_file_path + 'htmls/省会城市快餐店数量极坐标分类堆叠柱状图.html')
+
 
 if __name__ == '__main__':
     print_demo_head('AQI指数', False)
