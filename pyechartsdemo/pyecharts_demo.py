@@ -6,6 +6,8 @@ import pandas as pd
 
 from pyecharts import Bar, Style
 from pyecharts import Polar
+from pyecharts import Bar3D
+from pyecharts import HeatMap
 
 input_file_path = '../inputfiles/pyecharts/'
 output_file_path = '../outputfiles/pyecharts/'
@@ -65,11 +67,11 @@ def generate_kfc_dks_distribute_polar_bar_chart():
     kfc_num = data['KFC店面数量'].tolist()
     dks_num = data['德克士店面数量'].tolist()
     radius = city
-    polar = Polar('省会城市快餐店数量', width=1200, height=600)
-    polar.add('', mc_num, radius_data=radius, type='barAngle', is_stack=True)
-    polar.add('', kfc_num, radius_data=radius, type='barAngle', is_stack=True)
-    polar.add('', dks_num, radius_data=radius, type='barAngle', is_stack=True)
-    polar.render(output_file_path + 'htmls/省会城市快餐店数量极坐标堆叠柱状图.html')
+    # polar = Polar('省会城市快餐店数量', width=1200, height=600)
+    # polar.add('', mc_num, radius_data=radius, type='barAngle', is_stack=True)
+    # polar.add('', kfc_num, radius_data=radius, type='barAngle', is_stack=True)
+    # polar.add('', dks_num, radius_data=radius, type='barAngle', is_stack=True)
+    # polar.render(output_file_path + 'htmls/省会城市快餐店数量极坐标堆叠柱状图.html')
 
     polar = Polar('省会城市快餐店数量', width=1200, height=1200)
     polar.add('', mc_num, radius_data=radius, type='barRadius', is_stack=True)
@@ -78,12 +80,67 @@ def generate_kfc_dks_distribute_polar_bar_chart():
     polar.render(output_file_path + 'htmls/省会城市快餐店数量极坐标分类堆叠柱状图.html')
 
 
+def generate_3d_bar_chart():
+    data = pd.read_excel(input_file_path + '每日销量.xlsx', sheet_name=0)
+    print(data.head())
+    x_axis = data['week'].tolist()
+    data['week'] = data['week'].str.replace('week', '').map(int) - 1
+    data = data.set_index('week')
+    y_axis = data.columns.tolist()
+    data.columns = range(0, 7)
+    data = data.stack().reset_index()
+    data.columns = ['week', 'day', 'amount']
+    print(data.head())
+    style = Style(
+        title_color='#A52A2A',
+        title_pos='center',
+        width=900,
+        height=1100,
+        background_color='#ABABAB'
+    )
+    style_3d = style.add(
+        is_visualmap=True,
+        visual_range=[0, 120],
+        visual_range_color=['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+                            '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
+        grid3d_width=200,
+        grid3d_depth=80,
+        xaxis_label_textcolor='#fff',
+        is_grid3d_rotate=True,
+        legend_pos='right'
+    )
+    bar3d = Bar3D('全年产量情况', **style.init_style)
+    bar3d.add('每日产量', x_axis, y_axis, data.values.tolist(), **style_3d)
+    bar3d.render(output_file_path + 'htmls/全年产量情况3D柱状图.html')
+
+
+def generate_heatmap():
+    data = pd.read_excel(input_file_path + '每日销量.xlsx', sheet_name=0)
+    print(data.head())
+    x_axis = data['week'].tolist()
+    data['week'] = data['week'].str.replace('week', '').map(int) - 1
+    data = data.set_index('week')
+    y_axis = data.columns.tolist()
+    data.columns = range(0, 7)
+    data = data.stack().reset_index()
+    data.columns = ['week', 'day', 'amount']
+    heatmap = HeatMap()
+    heatmap.add('全年产量情况', x_axis, y_axis, data.values.tolist(), is_visualmap=True,
+                visual_text_color="#000", visual_orient='horizontal')
+    heatmap.render(output_file_path + 'htmls/全年产量情况热力图.html')
+
+
 if __name__ == '__main__':
-    print_demo_head('AQI指数', False)
-    generate_aqi_bar_chart()
+    # print_demo_head('AQI指数', False)
+    # generate_aqi_bar_chart()
+    #
+    # print_demo_head('省会城市KFC、德克士分布图')
+    # generate_kfc_dks_distribute_bar_chart()
+    #
+    # print_demo_head('省会城市KFC、德克士极坐标分布图')
+    # generate_kfc_dks_distribute_polar_bar_chart()
+    # print_demo_head('全年产量3D柱状图')
+    # generate_3d_bar_chart()
 
-    print_demo_head('省会城市KFC、德克士分布图')
-    generate_kfc_dks_distribute_bar_chart()
-
-    print_demo_head('省会城市KFC、德克士极坐标分布图')
-    generate_kfc_dks_distribute_polar_bar_chart()
+    print_demo_head('全年产量热力图')
+    generate_heatmap()
