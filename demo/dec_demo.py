@@ -32,6 +32,13 @@ print(dict1.fromkeys(('A', 'B', 'C')))
 dict3 = dict1.fromkeys([1, 2, 3, 4])
 print(dict3)
 
+# 字典的浅拷贝
+dict4 = dict3.copy()
+print(dict4)
+dict4[1] = 'a'
+print('dict3:' + str(dict3))
+print('dict4:' + str(dict4))
+
 print(1 in dict3)
 
 print(dict3.items())
