@@ -1,4 +1,7 @@
-# 问题网址记录
+# 网址记录
+## 学习网址
+- [快速学Python](https://github.com/xianhu/LearnPython)
+
 ## 配置问题
 
 1. charles 代理问题 [Charles抓包https](https://www.jianshu.com/p/ec0a38d9a8cf)
@@ -21,4 +24,5 @@
 
 
 ## todo
-- 用Python写一个翻译脚本（实现基本的GUI界面）
+- [用Python写一个翻译脚本（实现基本的GUI界面）](https://blog.csdn.net/MrLevo520/article/details/51674188)
+    > 里面包含了如何创建GUI界面，如何发布成APP的详细步骤
