@@ -56,7 +56,7 @@ def simple_plot():
     return
 
 
-simple_plot()
+# simple_plot()
 
 
 def simple_advanced_plot():

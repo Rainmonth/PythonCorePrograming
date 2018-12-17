@@ -38,3 +38,8 @@ set3.discard('x')
 print(set3)
 set3.pop()
 print(set3)
+
+s = set([3, 5, 9, 10])  # 创建一个数值集合，返回{3, 5, 9, 10}
+t = set("Hello")  # 创建一个字符的集合，返回{'l', 'H', 'e', 'o'}
+c = s - t
+d = t - s

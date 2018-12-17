@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 import re
 import os
+import sys
 
 errors = ['验证通过！', '身份证号码位数不对', '身份证出身日期不对', '含有非法字符', '身份证校验错误', '身份证地区错误']
 
@@ -433,3 +434,4 @@ if __name__ == '__main__':
     get_all_mobiles()
     get_all_emails()
     get_all_urls()
+    print("my {1[spam]} runs {0.platform}".format(sys, {'spam': 'laptop'}))  # 基于位置的键和属性
