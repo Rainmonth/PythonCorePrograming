@@ -548,26 +548,28 @@ myfunc('spam')  # 函数调用
 
 global a  # 全局变量
 nonlocal x  # 在函数或其他作用域中使用外层（非全局）变量
-yield x  # 生成器函数返回
-lambda  # 匿名函数
-
-        # -- Python函数变量名解析:LEGB原则，即:
-        """
-        local(functin) --> encloseing function locals --> global(module) --> build-in(python)
-        说明:以下边的函数maker为例 则相对于action而言 X为Local N为Encloseing
-        """
-
-        # -- 嵌套函数举例:工厂函数
-        def maker(N):
 
 
-def action(X):
-    return X ** N
-
-
-return action
-f = maker(2)  # pass 2 to N
-f(3)  # 9, pass 3 to X
+# yield x  # 生成器函数返回
+# lambda  # 匿名函数
+#
+#         # -- Python函数变量名解析:LEGB原则，即:
+#         """
+#         local(functin) --> encloseing function locals --> global(module) --> build-in(python)
+#         说明:以下边的函数maker为例 则相对于action而言 X为Local N为Encloseing
+#         """
+#
+#         # -- 嵌套函数举例:工厂函数
+#         def maker(N):
+#
+#
+# def action(X):
+#     return X ** N
+#
+#
+# return action
+# f = maker(2)  # pass 2 to N
+# f(3)  # 9, pass 3 to X
 
 
 # -- 嵌套函数举例:lambda实例
@@ -623,10 +625,10 @@ f(a=1, c=3)  # 关键字参数和默认参数的混合
 def keyOnly(a, *b, c): print('')  # c就为keyword-only匹配 必须使用关键字c = value匹配
 
 
-def keyOnly(a, *, b, c): ......  # b c为keyword-only匹配 必须使用关键字匹配
+# def keyOnly(a, *, b, c): ......  # b c为keyword-only匹配 必须使用关键字匹配
 
 
-def keyOnly(a, *, b=1): ......  # b有默认值 或者省略 或者使用关键字参数b = value
+# def keyOnly(a, *, b=1): ......  # b有默认值 或者省略 或者使用关键字参数b = value
 
 
 # -- 可变参数匹配: * 和 **
@@ -686,7 +688,7 @@ def action(x):  # 嵌套lambda函数
 
 
 def is_great_than_one(tmp):
-    return temp > 1
+    return tmp > 1
 
 
 f = lambda: a if is_great_than_one(2) else b  # 无参数的lambda函数，使用方法f()
@@ -694,8 +696,10 @@ f = lambda: a if is_great_than_one(2) else b  # 无参数的lambda函数，使�
 # -- lambda函数与map filter reduce函数的结合
 list(map((lambda x: x + 1), [1, 2, 3]))  # [2, 3, 4]
 list(filter((lambda x: x > 0), range(-4, 5)))  # [1, 2, 3, 4]
-functools.reduce((lambda x, y: x + y), [1, 2, 3])  # 6
-functools.reduce((lambda x, y: x * y), [2, 3, 4])  # 24
+
+
+# functools.reduce((lambda x, y: x + y), [1, 2, 3])  # 6
+# functools.reduce((lambda x, y: x * y), [2, 3, 4])  # 24
 
 
 # -- 生成器函数:yield VS return
@@ -731,7 +735,7 @@ X = 22  # 全局变量X的声明和定义
 
 
 def test():
-    print(X)  # 如果没有下一语句 则该句合法 打印全局变量X
+    # print(X)  # 如果没有下一语句 则该句合法 打印全局变量X
     X = 88  # 这一语句使得上一语句非法 因为它使得X变成了本地变量 上一句变成了打印一个未定义的本地变量(局部变量)
     if False:  # 即使这样的语句 也会把print语句视为非法语句 因为:
         X = 88  # Python会无视if语句而仍然声明了局部变量X
@@ -776,52 +780,52 @@ foo()  # 还是输出1
 
 """数学运算类"""
 abs(x)  # 求绝对值，参数可以是整型，也可以是复数，若参数是复数，则返回复数的模
-complex([real[, imag]])  # 创建一个复数
+# complex([real[, imag]])  # 创建一个复数
 divmod(a, b)  # 分别取商和余数，注意：整型、浮点型都可以
 float([x])  # 将一个字符串或数转换为浮点数。如果无参数将返回0.0
-int([x[, base]])  # 将一个字符串或浮点数转换为int类型，base表示进制
-long([x[, base]])  # 将一个字符串或浮点数转换为long类型
+# int([x[, base]])  # 将一个字符串或浮点数转换为int类型，base表示进制
+# long([x[, base]])  # 将一个字符串或浮点数转换为long类型
 pow(x, y)  # 返回x的y次幂
-range([start], stop[, step])  # 产生一个序列，默认从0开始
-round(x[, n])  # 四舍五入
-sum(iterable[, start])  # 对集合求和
+# range([start], stop[, step])  # 产生一个序列，默认从0开始
+# round(x[, n])  # 四舍五入
+# sum(iterable[, start])  # 对集合求和
 oct(x)  # 将一个数字转化为8进制字符串
 hex(x)  # 将一个数字转换为16进制字符串
 chr(i)  # 返回给定int类型对应的ASCII字符
-unichr(i)  # 返回给定int类型的unicode
+# unichr(i)  # 返回给定int类型的unicode
 ord(c)  # 返回ASCII字符对应的整数
 bin(x)  # 将整数x转换为二进制字符串
 bool([x])  # 将x转换为Boolean类型
 
 """集合类操作"""
-basestring()  # str和unicode的超类，不能直接调用，可以用作isinstance判断
-format(value[, format_spec])  # 格式化输出字符串，格式化的参数顺序从0开始，如“I am {0},I like {1}”
-enumerate(sequence[, start=0])  # 返回一个可枚举的对象，注意它有第二个参数
-iter(obj[, sentinel])  # 生成一个对象的迭代器，第二个参数表示分隔符
-max(iterable[, args...][key])  # 返回集合中的最大值
-min(iterable[, args...][key])  # 返回集合中的最小值
-dict([arg])  # 创建数据字典
-list([iterable])  # 将一个集合类转换为另外一个集合类
+# basestring()  # str和unicode的超类，不能直接调用，可以用作isinstance判断
+# format(value[, format_spec])  # 格式化输出字符串，格式化的参数顺序从0开始，如“I am {0},I like {1}”
+# enumerate(sequence[, start=0])  # 返回一个可枚举的对象，注意它有第二个参数
+# iter(obj[, sentinel])  # 生成一个对象的迭代器，第二个参数表示分隔符
+# max(iterable[, args...][key])  # 返回集合中的最大值
+# min(iterable[, args...][key])  # 返回集合中的最小值
+# dict([arg])  # 创建数据字典
+# list([iterable])  # 将一个集合类转换为另外一个集合类
 set()  # set对象实例化
-frozenset([iterable])  # 产生一个不可变的set
-tuple([iterable])  # 生成一个tuple类型
+# frozenset([iterable])  # 产生一个不可变的set
+# tuple([iterable])  # 生成一个tuple类型
 str([object])  # 转换为string类型
-sorted(iterable[, cmp[, key[, reverse]]])  # 集合排序
+# sorted(iterable[, cmp[, key[, reverse]]])  # 集合排序
 L = [('b', 2), ('a', 1), ('c', 3), ('d', 4)]
 sorted(L, key=lambda x: x[1], reverse=True)  # 使用Key参数和reverse参数
 sorted(L, key=lambda x: (x[0], x[1]))  # 使用key参数进行多条件排序，即如果x[0]相同，则比较x[1]
 
 """逻辑判断"""
-all(iterable)  # 集合中的元素都为真的时候为真，特别的，若为空串返回为True
-any(iterable)  # 集合中的元素有一个为真的时候为真，特别的，若为空串返回为False
-cmp(x, y)  # 如果x < y ,返回负数；x == y, 返回0；x > y,返回正数
+# all(iterable)  # 集合中的元素都为真的时候为真，特别的，若为空串返回为True
+# any(iterable)  # 集合中的元素有一个为真的时候为真，特别的，若为空串返回为False
+# cmp(x, y)  # 如果x < y ,返回负数；x == y, 返回0；x > y,返回正数
 
 """IO操作"""
-file(filename[, mode[, bufsize]])  # file类型的构造函数。
-input([prompt])  # 获取用户输入，推荐使用raw_input，因为该函数将不会捕获用户的错误输入，意思是自行判断类型
+# file(filename[, mode[, bufsize]])  # file类型的构造函数。
+# input([prompt])  # 获取用户输入，推荐使用raw_input，因为该函数将不会捕获用户的错误输入，意思是自行判断类型
 # 在 Built-in Functions 里有一句话是这样写的：Consider using the raw_input() function for general input from users.
-raw_input([prompt])  # 设置输入，输入都是作为字符串处理
-open(name[, mode[, buffering]])  # 打开文件，与file有什么不同？推荐使用open
+# raw_input([prompt])  # 设置输入，输入都是作为字符串处理
+# open(name[, mode[, buffering]])  # 打开文件，与file有什么不同？推荐使用open
 
 """其他"""
 callable(object)  # 检查对象object是否可调用
@@ -829,52 +833,53 @@ classmethod(func)  # 用来说明这个func是个类方法
 staticmethod(func)  # 用来说明这个func为静态方法
 dir([object])  # 不带参数时，返回当前范围内的变量、方法和定义的类型列表；带参数时，返回参数的属性、方法列表。
 help(obj)  # 返回obj的帮助信息
-eval(expression)  # 计算表达式expression的值，并返回
+# eval(expression)  # 计算表达式expression的值，并返回
 exec(str)  # 将str作为Python语句执行
-execfile(filename)  # 用法类似exec()，不同的是execfile的参数filename为文件名，而exec的参数为字符串。
-filter(function, iterable)  # 构造一个序列，等价于[item for item in iterable if function(item)]，function返回值为True或False的函数
+# execfile(filename)  # 用法类似exec()，不同的是execfile的参数filename为文件名，而exec的参数为字符串。
+# filter(function, iterable)  # 构造一个序列，等价于[item for item in iterable if function(item)]，function返回值为True或False的函数
 list(filter(bool, range(-3, 4)))  # 返回[-3, -2, -1, 1, 2, 3], 没有0
 hasattr(object, name)  # 判断对象object是否包含名为name的特性
-getattr(object, name[, defalut])  # 获取一个类的属性
-setattr(object, name, value)  # 设置属性值
+# getattr(object, name[, defalut])  # 获取一个类的属性
+# setattr(object, name, value)  # 设置属性值
 delattr(object, name)  # 删除object对象名为name的属性
 globals()  # 返回一个描述当前全局符号表的字典
 hash(object)  # 如果对象object为哈希表类型，返回对象object的哈希值
 id(object)  # 返回对象的唯一标识，一串数字
-isinstance(object, classinfo)  # 判断object是否是class的实例
+# isinstance(object, classinfo)  # 判断object是否是class的实例
 isinstance(1, int)  # 判断是不是int类型
 isinstance(1, (int, float))  # isinstance的第二个参数接受一个元组类型
-issubclass(
 
 
-class , classinfo)  # 判断class是否为classinfo的子类
-locals()  # 返回当前的变量列表
-map(function, iterable, ...)  # 遍历每个元素，执行function操作
-list(map(abs, range(-3, 4)))  # 返回[3, 2, 1, 0, 1, 2, 3]
-next(iterator[, default])  # 类似于iterator.next()
-property([fget[, fset[, fdel[, doc]]]])  # 属性访问的包装类，设置后可以通过c.x=value等来访问setter和getter
-reduce(function, iterable[, initializer])  # 合并操作，从第一个开始是前两个参数，然后是前两个的结果与第三个合并进行处理，以此类推
+# issubclass(class , classinfo)  # 判断class是否为classinfo的子类
+# locals()  # 返回当前的变量列表
+# map(function, iterable, ...)  # 遍历每个元素，执行function操作
+#   list(map(abs, range(-3, 4)))  # 返回[3, 2, 1, 0, 1, 2, 3]
+# next(iterator[, default])  # 类似于iterator.next()
+# property([fget[, fset[, fdel[, doc]]]])  # 属性访问的包装类，设置后可以通过c.x=value等来访问setter和getter
+# reduce(function, iterable[, initializer])  # 合并操作，从第一个开始是前两个参数，然后是前两个的结果与第三个合并进行处理，以此类推
 
 
 def add(x, y): return x + y
 
 
-reduce(add, range(1, 11))  # 返回55 (注:1+2+3+4+5+6+7+8+9+10 = 55)
-reduce(add, range(1, 11), 20)  # 返回75
-reload(module)  # 重新加载模块
+# reduce(add, range(1, 11))  # 返回55 (注:1+2+3+4+5+6+7+8+9+10 = 55)
+# reduce(add, range(1, 11), 20)  # 返回75
+# reload(module)  # 重新加载模块
 repr(object)  # 将一个对象变幻为可打印的格式
-slice(start, stop[, step])  # 产生分片对象
+# slice(start, stop[, step])  # 产生分片对象
 type(object)  # 返回该object的类型
 vars([object])  # 返回对象的变量名、变量值的字典
-a = Class();  # Class为一个空类
-a.name = 'qi', a.age = 9
-vars(a)  # {'name':'qi', 'age':9}
-zip([iterable, ...])  # 返回对应数组
+# a = Class()  # Class为一个空类
+# a.name = 'qi'
+# a.age = 9
+# vars(a)  # {'name':'qi', 'age':9}
+# zip([iterable, ...])  # 返回对应数组
 list(zip([1, 2, 3], [4, 5, 6]))  # [(1, 4), (2, 5), (3, 6)]
-a = [1, 2, 3], b = ["a", "b", "c"]
+a = [1, 2, 3]
+b = ["a", "b", "c"]
 z = zip(a, b)  # 压缩：[(1, "a"), (2, "b"), (3, "c")]
 zip(*z)  # 解压缩：[(1, 2, 3), ("a", "b", "c")]
-unicode(string, encoding, errors)  # 将字符串string转化为unicode形式，string为encoded string。
+# unicode(string, encoding, errors)  # 将字符串string转化为unicode形式，string为encoded string。
 
 """模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle----模块Moudle"""
 
@@ -905,11 +910,11 @@ sys.stdin
 # -- 重载模块reload: 这是一个内置函数 而不是一条语句
 from imp import reload
 
-reload(module)
+# reload(module)
 
 # -- 模块的包导入:使用点号(.)而不是路径(dir1\dir2)进行导入
-import dir1.dir2.mod  # d导入包(目录)dir1中的包dir2中的mod模块 此时dir1必须在Python可搜索路径中
-from dir1.dir2.mod import *  # from语法的包导入
+# import dir1.dir2.mod  # d导入包(目录)dir1中的包dir2中的mod模块 此时dir1必须在Python可搜索路径中
+# from dir1.dir2.mod import *  # from语法的包导入
 
 # -- __init__.py包文件:每个导入的包中都应该包含这么一个文件
 """
@@ -919,21 +924,22 @@ from dir1.dir2.mod import *  # from语法的包导入
 """
 
 # -- 包相对导入:使用点号(.) 只能使用from语句
-from . import spam  # 导入当前目录下的spam模块（Python2: 当前目录下的模块, 直接导入即可）
-from .spam import name  # 导入当前目录下的spam模块的name属性（Python2: 当前目录下的模块, 直接导入即可，不用加.）
-from .. import spam  # 导入当前目录的父目录下的spam模块
+# from . import spam  # 导入当前目录下的spam模块（Python2: 当前目录下的模块, 直接导入即可）
+# from .spam import name  # 导入当前目录下的spam模块的name属性（Python2: 当前目录下的模块, 直接导入即可，不用加.）
+# from .. import spam  # 导入当前目录的父目录下的spam模块
 
 # -- 包相对导入与普通导入的区别
 from string import *  # 这里导入的string模块为sys.path路径上的 而不是本目录下的string模块(如果存在也不是)
-from .string import *  # 这里导入的string模块为本目录下的(不存在则导入失败) 而不是sys.path路径上的
+
+# from .string import *  # 这里导入的string模块为本目录下的(不存在则导入失败) 而不是sys.path路径上的
 
 # -- 模块数据隐藏:最小化from*的破坏
-_X  # 变量名前加下划线可以防止from*导入时该变量名被复制出去
-__all__ = ['x', 'x1', 'x2']  # 使用__all__列表指定from*时复制出去的变量名(变量名在列表中为字符串形式)
+# _X  # 变量名前加下划线可以防止from*导入时该变量名被复制出去
+# __all__ = ['x', 'x1', 'x2']  # 使用__all__列表指定from*时复制出去的变量名(变量名在列表中为字符串形式)
 
 # -- 可以使用__name__进行模块的单元测试:当模块为顶层执行文件时值为'__main__' 当模块被导入时为模块名
 if __name__ == '__main__':
-    doSomething
+    print('doSomething')
 # 模块属性中还有其他属性，例如：
 __doc__  # 模块的说明文档
 __file__  # 模块文件的文件名，包括全路径
@@ -954,6 +960,14 @@ getattr(M, 'name')
 
 
 # -- 最普通的类
+class C2():
+    pass
+
+
+class C3():
+    pass
+
+
 class C1(C2, C3):
     spam = 42  # 数据属性
 
@@ -976,6 +990,14 @@ class FirstClass(object):
         print("hello world")
 
 
+class Person():
+    def __init__(self):
+        self.pay = int(self.pay)
+
+    def giveRaise(self, percent, bonus=.10):
+        return self.pay
+
+
 # -- 子类扩展超类: 尽量调用超类的方法
 class Manager(Person):
     def giveRaise(self, percent, bonus=.10):
@@ -991,20 +1013,17 @@ bob.__dict__  # {'pay':0, 'name':'bob', 'job':'Manager'}
 
 # -- 返回1中 数据属性spam是属于类 而不是对象
 I1 = C1('bob');
-I2 = C2('tom')  # 此时I1和I2的spam都为42 但是都是返回的C1的spam属性
+# I2 = C2('tom')  # 此时I1和I2的spam都为42 但是都是返回的C1的spam属性
 C1.spam = 24  # 此时I1和I2的spam都为24
 I1.spam = 3  # 此时I1新增自有属性spam 值为3 I2和C1的spam还都为24
 
+
 # -- 类方法调用的两种方式
-instance.method(arg...)
-
-
-class .method(instance, arg...)
+# instance.method(arg...)
+# class .method(instance, arg...)
 
 # -- 抽象超类的实现方法
 # (1)某个函数中调用未定义的函数 子类中定义该函数
-
-
 def delegate(self):
     self.action()  # 本类中不定义action函数 所以使用delegate函数时就会出错
 
@@ -1024,6 +1043,10 @@ class Super(metaclass=ABCMeta):
 
 
 x = Super()  # 返回 TypeError: Can't instantiate abstract class Super with abstract methods action
+
+
+class B():
+    pass
 
 
 # -- # OOP和继承: "is-a"的关系
@@ -1075,8 +1098,8 @@ class Spam(object):
     def doit(self, message):
         print(message)
 
-    def selfless(message)
-        print(message)
+    # def selfless(message)
+    #     print(message)
 
 
 obj = Spam()
@@ -1086,6 +1109,11 @@ x = Spam.doit  # 类的无绑定方法对象 类名 + 函数
 x(obj, 'hello world')
 x = Spam.selfless  # 类的无绑定方法函数 在3.0之前无效
 x('hello world')
+
+
+class MyObject():
+    pass
+
 
 # -- 获取对象信息: 属性和方法
 a = MyObject()
@@ -1122,6 +1150,10 @@ Student.set_age = MethodType(set_age, Student)  # 为类绑定一个方法 类�
 
 
 # -- 多重继承: "混合类", 搜索方式"从下到上 从左到右 广度优先"
+class C():
+    pass
+
+
 class A(B, C):
     pass
 
@@ -1199,18 +1231,14 @@ cmeth = classmethod(cmeth)
 
 
 # -- 类修饰器:是它后边的类的运行时的声明 由@符号以及后边紧跟的"元函数"(metafunction)组成
-def decorator(aClass): .....
+# def decorator(aClass): .....
 
 
-@decorator
-class C(object): ....
-
-
+# @decorator
+# class C(object): ....
 # 等同于:
-class C(object): ....
-
-
-C = decorator(C)
+# class C(object): ....
+# C = decorator(C)
 
 
 # -- 限制class属性: __slots__属性
@@ -1319,7 +1347,7 @@ class Student(object):
         if attr == 'age':
             return 25  # 当获取age属性时返回25
 
-    raise AttributeError('object has no attribute: %s' % attr)
+    # raise AttributeError('object has no attribute: %s' % attr)
     # 注意: 只有当属性不存在时 才会调用该方法 且该方法默认返回None 需要在函数最后引发异常
 
 
@@ -1365,39 +1393,41 @@ def __len__(self):
 
 # -- #捕获异常:
 try:
+    print('do some ops')
 except:  # 捕获所有的异常 等同于except Exception:
+    print("exception happens")
 # except name:  # 捕获指定的异常
 # except name, value:  # 捕获指定的异常和额外的数据(实例)
 # except (name1, name2):
 # except (name1, name2), value:
 # except name4 as X:
 else:  # 如果没有发生异常
+    print("no exception happens")
 finally:  # 总会执行的部分
+    print('execute evrytime')
 # 引发异常: raise子句(raise IndexError)
-raise < instance >  # raise instance of a class, raise IndexError()
-raise <
-
-class >  # make and raise instance of a class, raise IndexError
-    raise  # reraise the most recent exception
+# raise < instance >  # raise instance of a class, raise IndexError()
+# raise <class >  # make and raise instance of a class, raise IndexError
+#     raise  # reraise the most recent exception
 
 # -- Python3.x中的异常链: raise exception from otherException
-except Exception as X:
-raise IndexError('Bad') from X
+# except Exception as X:
+# raise IndexError('Bad') from X
 
 # -- assert子句: assert <test>, <data>
 assert x < 0, 'x must be negative'
 
 # -- with/as环境管理器:作为常见的try/finally用法模式的替代方案
-with expression[as variable], expression[as variable]:
-    # 例子:
-    with open('test.txt') as myfile:
-        for line in myfile: print(line)
-    # 等同于:
-    myfile = open('test.txt')
-    try:
-        for line in myfile: print(line)
-    finally:
-        myfile.close()
+# with expression[as variable], expression[as variable]:
+#     # 例子:
+#     with open('test.txt') as myfile:
+#         for line in myfile: print(line)
+#     # 等同于:
+#     myfile = open('test.txt')
+#     try:
+#         for line in myfile: print(line)
+#     finally:
+#         myfile.close()
 
 # -- 用户自定义异常: class Bad(Exception):.....
 """
@@ -1449,8 +1479,9 @@ except FormatError as X:
 
 # -- 关于sys.exc_info:允许一个异常处理器获取对最近引发的异常的访问
 try:
-    ......
+    print("do some ops")
 except:
+    print('do someting with the exception')
 # 此时sys.exc_info()返回一个元组(type, value, traceback)
 # type:正在处理的异常的异常类型
 # value:引发的异常的实例
@@ -1506,7 +1537,7 @@ chr(196)  # 返回一个特殊字符：Ä
 # -- 查看Python中的字符串编码名称，查看系统的编码
 import encodings
 
-help(encoding)
+# help(encoding)
 import sys
 
 sys.platform  # 'win64'
@@ -1533,14 +1564,14 @@ B = B"""
 # B = b'\nxxxx\nyyyy\n'
 # 编码，将str字符串转化为其raw bytes形式：
 str.encode(encoding='utf-8', errors='strict')
-bytes(str, encoding)
+# bytes(str, encoding)
 # 编码例子：
 S = 'egg'
 S.encode()  # b'egg'
 bytes(S, encoding='ascii')  # b'egg'
 # 解码，将raw bytes字符串转化为str形式：
 bytes.decode(encoding='utf-8', errors='strict')
-str(bytes_or_buffer[, encoding[, errors]])
+# str(bytes_or_buffer[, encoding[, errors]])
 # 解码例子：
 B = b'spam'
 B.decode()  # 'spam'
