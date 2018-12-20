@@ -1,9 +1,10 @@
 # 网址记录
+
 ## 学习网址
+- [音视频学习](https://blog.csdn.net/leixiaohua1020)
 - [快速学Python](https://github.com/xianhu/LearnPython)
 
 ## 配置问题
-
 1. charles 代理问题 [Charles抓包https](https://www.jianshu.com/p/ec0a38d9a8cf)
 
 ## 爬虫相关
@@ -11,8 +12,11 @@
 #### 项目运行前提条件
 Mac 下安装MongoDB、Redis、elasticsearch
 ##### 安装MongoDB
-1.[了解MongoDB]()
-2.[Mac下安装与配置MongoDB](https://blog.csdn.net/thatway_wp/article/details/79362261)
+1. [了解MongoDB]()
+    - [MongoDB百度百科](https://baike.baidu.com/item/mongodb/60411?fr=aladdin)
+    - [MongoDB官网](https://www.mongodb.com/)
+    - [MongoDB文档](https://docs.mongodb.com/)
+2. [Mac下安装与配置MongoDB](https://blog.csdn.net/thatway_wp/article/details/79362261)
 具体步骤：
 - 官网下载对应的版本，我下载的是`mongodb-osx-ssl-x86_64-4.0.4.tgz`
 - 解压缩到指定目录（假设为dir）
@@ -21,7 +25,7 @@ Mac 下安装MongoDB、Redis、elasticsearch
      export MONGODB_HOME="dir"
      export PATH=${PATH}:${MONGODB_HOME}/bin      
     ```
-- 配置MongoDB运行环境（采用以下配置，其中{dir}换成自己定义的数据库存放目录)
+- 配置MongoDB运行环境(采用以下配置，其中{dir}换成自己定义的数据库存放目录)
     ```
     #数据库路径
     dbpath={dir}/db/
