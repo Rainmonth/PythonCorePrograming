@@ -2,6 +2,7 @@
 
 ## 学习网址
 - [音视频学习](https://blog.csdn.net/leixiaohua1020)
+- [提高效率的AS插件](https://juejin.im/post/5bbda0df5188255c7b16a2a1)
 - [快速学Python](https://github.com/xianhu/LearnPython)
 
 ## 配置问题
