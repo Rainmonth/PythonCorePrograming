@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 # 多线程示例（利用thread）
 
-# import thread python3.x中不在使用thread了，将其改成了_thread，并且推荐使用threading
+# import thread_demo python3.x中不在使用thread了，将其改成了_thread，并且推荐使用threading
 import _thread
 from time import sleep, ctime
 
