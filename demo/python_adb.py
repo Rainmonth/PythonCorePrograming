@@ -6,6 +6,7 @@
 
 import os
 import math
+import time
 
 
 # os.system('adb version')
@@ -26,6 +27,15 @@ import math
 
 
 # print(os.popen('adb shell dumpsys window windows |grep "mCurrentFocus"').read())
+
+def get_launch_activity(package_name):
+    """
+    通过aapt 获取制定包名的启动Activity
+    :param package_name:  应用包名
+    :return:
+    """
+    return ''
+
 
 def screen_cap(save_path='/sdcard/', save_name='test.jpg', pull_to='/Users/randy/Downloads'):
     save_path = input("请输入要保存到的路径:")
@@ -70,6 +80,43 @@ def unlock_phone():
     # 输入密码
     pwd = input("请输入密码:")
     os.system('adb shell input text ' + pwd)
+    print('等待5秒')
+    time.sleep(5)
+
+
+def get_app_icon_location():
+    print('获取APP图标的位置区域')
+    print('获取区域之后，随机生成一个位于该区域的点')
+
+
+def app_locate_and_open():
+    print('定位并打开APP')
+    x = 935
+    y = 821
+    os.system('adb shell input tap ' + str(x) + ' ' + str(y))
+    print('等待4秒')
+    time.sleep(4)
+
+
+def enter_sign():
+    print('进入通知页面')
+    x = 724
+    y = 765
+    os.system('adb shell input tap ' + str(x) + ' ' + str(y))
+    print('等待3秒')
+    time.sleep(3)
+    print('进入签到页面')
+    x = 700
+    y = 1600
+    os.system('adb shell input tap ' + str(x) + ' ' + str(y))
+
+
+def do_sign_in():
+    print('开始签到')
+
+
+def do_sign_out():
+    print('开始签退')
 
 
 def swipe():
@@ -101,6 +148,18 @@ def direct_swipe(x1, y1, x2, y2, time):
         print(e)
 
 
+def auto_sign():
+    # 如果处于锁屏页面，先解锁
+    unlock_phone()
+    # 找到相应的应用，打开
+    app_locate_and_open()
+    # 进入签到页面
+    enter_sign()
+
+    # 开始签到
+    do_sign_in()
+
+
 # adb shell input                                       查看input的帮助
 # adb shell input tap x,y                               点击屏幕上坐标为(x,y)的点
 # adb shell input swipe x1,y1,x2,y2,duration            从屏幕(x1,y1)滑动到(x2,y2)
@@ -117,4 +176,12 @@ if __name__ == '__main__':
 
     # unlock_phone()
     # swipe()
-    direct_swipe(100, 200, 350, 630, 500)
+    # direct_swipe(100, 200, 350, 630, 500)
+    # app_locate_and_open()
+    # enter_sign()
+    # 开始签到
+    # do_sign_in()
+    # 一段时间后签退
+    # do_sign_out()
+
+    auto_sign()
