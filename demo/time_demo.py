@@ -1,5 +1,9 @@
 #!usr/bin/evn python
 # coding=utf-8
+# 描述： python 时间操作
+# 作者： randy
+# 时间： 2018/12/17 7:18 PM
+
 # % y->两位数的年份表示（00 - 99）
 # % Y->四位数的年份表示（000 - 9999）
 # % m->月份（01 - 12）
@@ -65,14 +69,6 @@ def get_localtimetuple():
     return localtimetuple
 
 
-def time_com(first_time, secend_time):
-    print(first_time)
-    print(time.strftime("%H%M%S", first_time))
-    print(secend_time)
-    print(time.strftime("%H%M%S", secend_time))
-    return int(time.strftime("%H%M%S", first_time)) - int(time.strftime("%H%M%S", secend_time))
-
-
 def timestamp2timetuple(timestamp=None):
     """
     时间戳转换成时间元组
@@ -89,14 +85,20 @@ def timestamp2timetuple(timestamp=None):
 def timetuple2timestamp(time_tuple):
     """
     时间元组转换成时间戳
-    :param time_tuple:
-    :return:
+    :param time_tuple: 时间元组
+    :return: 时间戳
     """
     timestamp = time.mktime(time_tuple)
     return timestamp
 
 
 def timestamp2timestr(timestamp=None, str_format='%Y-%m-%d %H:%M:%S'):
+    """
+    时间戳转换成格式化时间字符串
+    :param timestamp: 时间戳
+    :param str_format: 时间字符串格式
+    :return: 格式化时间字符串
+    """
     if timestamp is None:
         time_tuple = time.localtime()
     else:
@@ -111,7 +113,8 @@ def timestr2timestamp(timestr):
     :param timestr: 时间字符串，如"Mon May  8 14:27:08  2017"
     :return: 时间戳
     """
-    timestamp = time.mktime(time.strptime(timestr, "%Y-%m-%d %H:%M:%S"))
+    timetuple = time.strptime(timestr, '%Y-%m-%d %H:%M:%S')
+    timestamp = time.mktime(timetuple)
     print(timestamp)
     return timestamp
 
@@ -139,6 +142,14 @@ def timetuple2timestr(time_tuple, str_format='%Y-%m-%d %H:%M:%S'):
     return timestr
 
 
+def time_com(first_time, secend_time):
+    print(first_time)
+    print(time.strftime("%H%M%S", first_time))
+    print(secend_time)
+    print(time.strftime("%H%M%S", secend_time))
+    return int(time.strftime("%H%M%S", first_time)) - int(time.strftime("%H%M%S", secend_time))
+
+
 def is_time_between(start, end, time_tuple=None):
     """
     判断时间是否在start和end之间
@@ -158,7 +169,7 @@ if __name__ == '__main__':
     get_timetuple()
     get_localtimetuple()
 
-    result = time_com(get_timetuple(), timestamp2timetuple("14:23:40", "%H:%M:%S"))
+    result = time_com(get_timetuple(), timestr2timetuple("14:23:40", "%H:%M:%S"))
     print(result)
 
     print('时间是否是在12:00:00到17:00:00之间->' + str(is_time_between(120000, 170000)))
