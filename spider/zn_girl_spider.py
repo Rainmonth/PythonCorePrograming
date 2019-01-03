@@ -14,6 +14,8 @@ from lxml import etree
 """
 piicturelist = []
 
+savedir = '/Users/randy/Pictures/ZnGirls/'
+
 header = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
                   "Chrome/52.0.2743.116 Safari/537.36",
@@ -22,12 +24,13 @@ header = {
 
 context = ssl._create_unverified_context()
 
-"""
-从起始页面 http://www.nvshens.com/rank/sum/ 开始获取排名的页数和每一页的url
-"""
-
 
 def mmRankSum():
+    """
+    从起始页面 http://www.nvshens.com/rank/sum/ 开始获取排名的页数和每一页的url
+    """
+    savedir = input('请输入图片保存的地址:')
+
     req = urllib.request.Request("http://www.nvshens.com/rank/sum/", headers=header)
     html = urllib.request.urlopen(req, context=context)
     htmldata = html.read()
@@ -41,13 +44,11 @@ def mmRankSum():
         mmRankitem(pagesitem)
 
 
-"""
-参数 url : 分页中每一页的具体url地址
-通过穿过来的参数，使用  lxml和xpath 解析 html，获取每一个MM写真专辑页面的url
-"""
-
-
 def mmRankitem(url):
+    """
+    参数 url : 分页中每一页的具体url地址
+    通过穿过来的参数，使用  lxml和xpath 解析 html，获取每一个MM写真专辑页面的url
+    """
     req = urllib.request.Request(url, headers=header)
     html = urllib.request.urlopen(req, context=context)
     htmldata = html.read()
@@ -60,13 +61,11 @@ def mmRankitem(url):
         # print "http://www.nvshens.com/" + pages[i]
 
 
-"""
-参数 url : 每一个MM专辑的页面地址
-通过穿过来的参数，获取每一个MM写真专辑图片集合的地址
-"""
-
-
 def getAlbums(girlUrl):
+    """
+       参数 url : 每一个MM专辑的页面地址
+       通过穿过来的参数，获取每一个MM写真专辑图片集合的地址
+       """
     req = urllib.request.Request(girlUrl, headers=header)
     html = urllib.request.urlopen(req, context=context)
     htmldata = html.read()
@@ -77,13 +76,11 @@ def getAlbums(girlUrl):
         getPagePictures("http://www.nvshens.com/" + pages[i])
 
 
-"""
-参数 albumsUrl : 每一个MM写真专辑图片集合的地址
-通过穿过来的参数，首先先获取图片集合的页数，然后每一页解析写真图片的真实地址
-"""
-
-
 def getPagePictures(albumsUrl):
+    """
+    参数 albumsUrl : 每一个MM写真专辑图片集合的地址
+    通过穿过来的参数，首先先获取图片集合的页数，然后每一页解析写真图片的真实地址
+    """
     req = urllib.request.Request(albumsUrl, headers=header)
     html = urllib.request.urlopen(req, context=context)
     htmldata = html.read()
@@ -93,13 +90,11 @@ def getPagePictures(albumsUrl):
         savePictures("http://www.nvshens.com" + pages[i])
 
 
-"""
-参数 itemPagesUrl : 每一个MM写真专辑图片集合的地址(进过分页检测)
-通过穿过来的参数，直接解析页面，获取写真图片的地址，然后下载保存到本地。
-"""
-
-
 def savePictures(itemPagesUrl):
+    """
+    参数 itemPagesUrl : 每一个MM写真专辑图片集合的地址(进过分页检测)
+    通过穿过来的参数，直接解析页面，获取写真图片的地址，然后下载保存到本地。
+    """
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/52.0.2743.116 Safari/537.36",
@@ -119,7 +114,7 @@ def savePictures(itemPagesUrl):
         pass
     for i in range(len(pages)):
         print(pages[i])
-        piicturelist.append(pages[i])
+        piicturelist.append((pages[i], names[i]))
 
         while len(piicturelist) > 100:
             saveUrlToTxtFile()
@@ -138,17 +133,26 @@ def savePictures(itemPagesUrl):
 
             respHtml = urlhtml.read()
 
-            binfile = open('/Users/RandyZhang/Pictures/ZnGirls/%s.jpg' % (names[i]), "wb")
+            binfile = open(savedir + '%s.jpg' % (names[i]), "wb")
             binfile.write(respHtml)
             binfile.close()
-        except Exception:
+        except Exception as e:
+            print(e)
             pass
+
+
+def get_random_ua():
+    """
+    随机获取UserAgent
+    :return:
+    """
+    pass
 
 
 def saveUrlToTxtFile():
     fl = open('list.txt', 'w')
     for i in piicturelist:
-        fl.write(i)
+        fl.write(i[0] + ' ' + i[1])
         fl.write("\n")
     fl.close()
 
