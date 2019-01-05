@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 # 描述： python 文件操作，相关模块：os、shutil->文件拷贝、struct->二进制支持
 # 作者： randy
+# 参考文章：https://www.cnblogs.com/xinchrome/p/5011304.html
 # 时间： 2019/1/4 4:50 PM
 
 import os
