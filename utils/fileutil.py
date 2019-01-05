@@ -244,8 +244,8 @@ def getsize(filepath):
 
 if __name__ == '__main__':
     # curdir()
-    # fileexist('/Users/randy/PycharmProjects/PythonLearning/toolkits/fileutil.py')
-    # direxist('/Users/randy/PycharmProjects/PythonLearning/toolkits')
+    # fileexist('/Users/randy/PycharmProjects/PythonLearning/utils/fileutil.py')
+    # direxist('/Users/randy/PycharmProjects/PythonLearning/utils')
     # isabspath('fileutil.py')
     # print(str(curdir()))
     # os.makedirs(str(curdir()) + '/test.txt', 0o777)

@@ -4,7 +4,7 @@
 
 from time import ctime, sleep
 
-from toolkits.threadutil import MyThread
+from utils.threadutil import MyThread
 
 
 # 斐波那契数
