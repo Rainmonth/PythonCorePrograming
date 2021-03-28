@@ -139,8 +139,8 @@ if __name__ == '__main__':
     #
     # print_demo_head('省会城市KFC、德克士极坐标分布图')
     # generate_kfc_dks_distribute_polar_bar_chart()
-    # print_demo_head('全年产量3D柱状图')
-    # generate_3d_bar_chart()
+    print_demo_head('全年产量3D柱状图')
+    generate_3d_bar_chart()
 
-    print_demo_head('全年产量热力图')
-    generate_heatmap()
+    # print_demo_head('全年产量热力图')
+    # generate_heatmap()
